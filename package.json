@@ -1,8 +1,8 @@
 {
   "type": "module",
-  "name": "@lionrockjs/adapter-form-captcha-recaptcha",
+  "name": "@lionrockjs/adapter-form-captcha-svg-captcha",
   "version": "0.0.1",
-  "description": "LionRockJS Captcha adapter for Google reCAPTCHA",
+  "description": "LionRockJS Captcha adapter for SVG Captcha",
   "main": "index.js",
   "scripts": {
     "test": "node --experimental-vm-modules ../../../node_modules/jest/bin/jest.js --coverage"
@@ -28,7 +28,7 @@
   "keywords": [
     "LionRockJS",
     "Captcha",
-    "reCAPTCHA"
+    "SVGCAPTCHA"
   ],
   "author": "Kojin Nakana",
   "license": "MIT",

@@ -1,6 +1,10 @@
 export default {
-  recaptcha: {
-    site_key: "",
-    secret: "",
+  svgCaptcha: {
+    salt: "thisislonglonglonglongtextover32bytes",
+    size: 4,
+    ignoreChars: "",
+    noise: 2,
+    color: true,
+    background: "#ffffff",
   },
 };
