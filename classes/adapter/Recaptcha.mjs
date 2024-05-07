@@ -1,5 +1,5 @@
 import {Central} from "@lionrockjs/central";
-import {ControllerMixinMultipartForm, FormCaptchaAdapter} from "@lionrockjs/mod-form";
+import {ControllerMixinMultipartForm, FormCaptchaAdapter} from "@lionrockjs/mixin-form";
 import querystring from "node:querystring";
 import {Controller} from "@lionrockjs/mvc";
 import axios from "axios";
