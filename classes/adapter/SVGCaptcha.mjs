@@ -1,6 +1,6 @@
 import {Controller} from "@lionrockjs/mvc";
 import {Central} from "@lionrockjs/central";
-import {ControllerMixinMultipartForm, FormCaptchaAdapter} from "@lionrockjs/mod-form";
+import {ControllerMixinMultipartForm, FormCaptchaAdapter} from "@lionrockjs/mixin-form";
 import svgCaptcha from "svg-captcha";
 import crypto from "node:crypto";
 const md5 = crypto.createHash('md5');
