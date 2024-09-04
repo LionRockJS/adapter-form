@@ -15,7 +15,7 @@ export default class FormCaptchaAdapterRecaptcha extends FormCaptchaAdapter {
     const recaptcha = await axios.post('https://www.google.com/recaptcha/api/siteverify',
       querystring.stringify({
         secret: Central.config.lead.recaptcha.secret,
-        response: $_POST['grecaptcha'],
+        response: $_POST['g-recaptcha-response'],
         remoteip: state.get(Controller.STATE_CLIENT_IP),
       })
     )
