@@ -5,8 +5,10 @@ import {Controller} from "@lionrockjs/mvc";
 import axios from "axios";
 
 export default class FormCaptchaAdapterRecaptcha extends FormCaptchaAdapter {
+  static SITE_KEY = Central.adapter.process().env.RECAPTCHA_SITE_KEY;
+  static SECRET = Central.adapter.process().env.RECAPTCHA_SECRET;
   static checkEnabled() {
-    return Central.config.lead.recaptcha?.site_key
+    return this.SITE_KEY;
   }
 
   static async verify(state= new Map()) {
@@ -14,7 +16,7 @@ export default class FormCaptchaAdapterRecaptcha extends FormCaptchaAdapter {
 
     const recaptcha = await axios.post('https://www.google.com/recaptcha/api/siteverify',
       querystring.stringify({
-        secret: Central.config.lead.recaptcha.secret,
+        secret: this.SECRET,
         response: $_POST['g-recaptcha-response'],
         remoteip: state.get(Controller.STATE_CLIENT_IP),
       })
