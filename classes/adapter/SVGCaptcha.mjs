@@ -6,16 +6,16 @@ import crypto from "node:crypto";
 const md5 = crypto.createHash('md5');
 
 export default class FormCaptchaAdapterRecaptcha extends FormCaptchaAdapter {
-  static SALT = Central.adapter.process().env.SVGCAPTCHA_SALT;
   static checkEnabled() {
     return true;
   }
 
   static async create() {
+    const salt = Central.adapter.process().env.SVGCAPTCHA_SALT;
     const captcha = svgCaptcha.create();
     return {
       data: captcha.data,
-      text: md5.update(captcha.text + this.SALT ).digest('hex')
+      text: md5.update(captcha.text + salt ).digest('hex')
     }
   }
 
