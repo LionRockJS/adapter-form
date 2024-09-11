@@ -6,6 +6,7 @@ import crypto from "node:crypto";
 const md5 = crypto.createHash('md5');
 
 export default class FormCaptchaAdapterRecaptcha extends FormCaptchaAdapter {
+  static SALT = Central.adapter.process().env.SVGCAPTCHA_SALT;
   static checkEnabled() {
     return true;
   }
@@ -14,13 +15,13 @@ export default class FormCaptchaAdapterRecaptcha extends FormCaptchaAdapter {
     const captcha = svgCaptcha.create();
     return {
       data: captcha.data,
-      text: md5.update(captcha.text + Central.config.form.svgCaptcha.salt ).digest('hex')
+      text: md5.update(captcha.text + this.SALT ).digest('hex')
     }
   }
 
   static async verify(state= new Map()) {
     const $_POST = state.get(ControllerMixinMultipartForm.POST_DATA);
-    const hash = md5.update($_POST['captcha'] + Central.config.form.svgCaptcha.salt).digest('hex');
+    const hash = md5.update($_POST['captcha'] + this.SALT).digest('hex');
     return hash === $_POST['captcha-sign'];
   }
 }
