@@ -19,9 +19,9 @@ export default class FormCaptchaAdapterRecaptcha extends FormCaptchaAdapter {
     }
   }
 
-  static async verify(state= new Map()) {
+  static async validate(state= new Map()) {
     const $_POST = state.get(ControllerMixinMultipartForm.POST_DATA);
-    const hash = md5.update($_POST['captcha'] + this.SALT).digest('hex');
+    const hash = md5.update($_POST['captcha'] + Central.adapter.process().env.SVGCAPTCHA_SALT).digest('hex');
     return hash === $_POST['captcha-sign'];
   }
 }
