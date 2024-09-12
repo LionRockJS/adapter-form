@@ -7,10 +7,10 @@ import axios from "axios";
 export default class FormCaptchaAdapterRecaptcha extends FormCaptchaAdapter {
 
   static checkEnabled() {
-    return Central.adapter.process().env.RECAPTCHA_SITE_KEY;
+    return !!Central.adapter.process().env.RECAPTCHA_SITE_KEY;
   }
 
-  static async verify(state= new Map()) {
+  static async validate(state= new Map()) {
     const $_POST = state.get(ControllerMixinMultipartForm.POST_DATA);
 
     const recaptcha = await axios.post('https://www.google.com/recaptcha/api/siteverify',

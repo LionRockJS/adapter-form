@@ -1,7 +1,7 @@
 {
   "type": "module",
   "name": "@lionrockjs/adapter-form-captcha-recaptcha",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "LionRockJS Captcha adapter for Google reCAPTCHA",
   "main": "index.js",
   "scripts": {
