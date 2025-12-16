@@ -21,6 +21,10 @@ export default class FormCaptchaAdapterRecaptcha extends FormCaptchaAdapter {
       })
     )
 
+    if(process.env.DEBUG === 'true') {
+      console.log('Recaptcha', recaptcha.data);
+    }
+
     return !(!recaptcha.data.success || recaptcha.data.score < 0.5);
   }
 }
