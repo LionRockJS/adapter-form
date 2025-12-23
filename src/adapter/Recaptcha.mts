@@ -1,0 +1,30 @@
+import { Central } from "@lionrockjs/central";
+import { ControllerMixinMultipartForm, FormCaptchaAdapter } from "@lionrockjs/mixin-form";
+import querystring from "node:querystring";
+import { Controller } from "@lionrockjs/mvc";
+import axios from "axios";
+
+export default class FormCaptchaAdapterRecaptcha extends FormCaptchaAdapter {
+
+  static checkEnabled() {
+    return !!Central.adapter.process().env.RECAPTCHA_SITE_KEY;
+  }
+
+  static async validate(state = new Map()) {
+    const $_POST = state.get(ControllerMixinMultipartForm.POST_DATA);
+
+    const recaptcha = await axios.post('https://www.google.com/recaptcha/api/siteverify',
+      querystring.stringify({
+        secret: Central.adapter.process().env.RECAPTCHA_SECRET,
+        response: $_POST['g-recaptcha-response'],
+        remoteip: state.get(Controller.STATE_CLIENT_IP),
+      })
+    )
+
+    if (process.env.DEBUG === 'true') {
+      console.log('Recaptcha', recaptcha.data);
+    }
+
+    return !(!recaptcha.data.success || recaptcha.data.score < 0.5);
+  }
+}
